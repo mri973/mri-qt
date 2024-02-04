@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viewport Height</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Viewport Height Information</h1>
+  <p id="viewportHeight">Viewport Height: </p>
+  <p id="innerHeight">Inner Height: </p>
+</div>
+
+<script>
+  function printHeights() {
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    const innerHeight = window.innerHeight;
+
+    document.getElementById('viewportHeight').textContent = `Viewport Height: ${viewportHeight}px`;
+    document.getElementById('innerHeight').textContent = `Inner Height: ${innerHeight}px`;
+  }
+
+  // Initial print
+  printHeights();
+
+  // Update heights on window resize
+  window.addEventListener('resize', printHeights);
+</script>
+
+</body>
+</html>
