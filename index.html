@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Template</title>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="app.css" />
+    <style>
+      .ws-nw {
+        white-space: nowrap;
+      }
+
+      /* Customize horizontal scrollbar for webkit browsers */
+      #scrolldiv::-webkit-scrollbar {
+        width: 0px;
+        /* height: 8px; */
+      }
+
+      #scrolldiv::-webkit-scrollbar-thumb {
+        background-color: rgb(220 225 230);
+        border-radius: 4px;
+      }
+
+      .scrolldiv::-webkit-scrollbar {
+        width: 8px;
+        /* height: 8px; */
+      }
+
+      .scrolldiv::-webkit-scrollbar-thumb {
+        /* background-color: rgb(243 244 246); */
+        background-color: #000;
+        border-radius: 0.25rem;
+      }
+
+      /* Customize horizontal scrollbar for Firefox */
+      /* #scrolldiv {
+        overflow-x: auto;
+        scrollbar-width: thin;
+        scrollbar-color: transparent transparent;
+      } */
+    </style>
+  <body>
+    <div class="min-h-screen bg-gray-300">
+      <div class="relative flex min-h-screen w-full flex-col justify-between gap-3 md:container md:mx-auto">
+        <nav class="w-full rounded bg-[#FFFFFF] px-2 sm:px-4 lg:px-4">
+          <div class="relative flex h-14 flex-row items-center justify-between md:h-[4.5rem]">
+            <div class="flex flex-row items-center gap-3">
+              <a href="http://www.mri-twt.com/admin/dashboard">
+                <img class="h-auto w-20 md:w-32" src="http://www.mri-twt.com/asset/img/adt_lgo.png" alt="MRI Learning Web App">
+              </a>
+            </div>
+            <!-- Profile dropdown -->
+            <div class="relative ml-3">
+              <button type="button" class="relative flex rounded-full text-sm outline-none ring-[0.16rem] ring-gray-400">
+                <img id="ddlf" class="h-8 w-8 rounded-full md:h-12 md:w-12" src="http://www.mri-twt.com/asset/img/default-user-img.png" alt="">
+              </button>
+              <!-- Dropdown menu, show/hide based on menu state -->
+              <div id="myDropdown" class="absolute right-0 md:right-[-0.75rem] z-10 mt-2 md:mt-[0.79rem] hidden min-w-48 md:min-w-56 origin-top-right rounded bg-white px-2 py-2 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none md:mt-4">
+                <!-- Active: "bg-gray-100", Not Active: "" -->
+                <div class="flex min-h-44 md:min-h-52 w-full flex-col items-center justify-center gap-3">
+                  <img class="h-auto w-24 md:w-32 rounded-full" src="http://www.mri-twt.com/asset/img/default-user-img.png" alt="">
+                  <p class="text-center text-[0.8rem] md:text-sm">
+                    <strong>Md. Rabiul Islam</strong>
+                    <br>mdrobi.khan5244@gmail.com
+                  </p>
+                </div>
+                <div class="flex w-full flex-row items-center justify-between gap-3">
+                  <a href="javascript:void(0)" id="cddlf" class="block w-full rounded md:px-4 px-1 py-2 text-center text-sm font-semibold text-gray-700 hover:bg-gray-200">Cancel</a>
+                  <a href="/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="block w-full rounded md:px-4 px-1 py-2 text-center text-sm font-semibold text-gray-700 hover:bg-gray-200">Sign out</a>
+                  <form id="logout-form" action="/logout" method="POST" class="d-none">
+                    <input type="hidden" name="_token" value="IBQqAoiE64reQW9X5KktzCNoToOnv64lsjAh6GSn" autocomplete="off">
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <!-- Main Content Body -->
+        <div class="flex">
+          <div id="scrolldiv" class="w-full flex flex-col justify-between items-center gap-3 mx-2 md:mx-0 mt-[56px] md:mt-0 md:min-h-[calc(100vh-141px)] md:max-h-[calc(100vh-141px)] md:overflow-y-auto rounded-[0.65rem]">
+            <div class="w-full md:container md:mx-auto">
+              <div class="w-full md:px-1">
+                <div class="flex h-full w-full flex-col justify-between gap-3 md:flex-row md:gap-5">
+                  <div class="mx-auto w-full rounded bg-[#FFFFFF] px-3 py-3 md:px-4 md:py-4 shadow md:w-full lg:w-[70%]">
+                    <div class="flex flex-col">
+                      <h1 class="text flex w-full flex-col items-center py-2 text-xl md:mb-4 bg-gray-200 rounded">
+                        <strong>Add Question Form</strong>
+                      </h1>
+                      <form action="#" method="POST" class="w-full">
+                        <div class="flex flex-col md:flex-row md:gap-5">
+                          <!-- Left Col -->
+                          <div class="flex flex-col items-center md:w-1/2">
+                            <div class="flex w-full flex-col">
+                              <label for="q_txt" class="mb-1 block text-sm font-bold tracking-wide text-gray-700">Enter question</label>
+                              <textarea name="que_txt" id="q_txt" rows="3" cols="50" placeholder="Enter question here" class="mb-1 block w-full appearance-none rounded border border-gray-300 bg-gray-50 px-2 py-2 leading-tight text-gray-600 focus:border-gray-200 focus:bg-white focus:outline-none"></textarea>
+                            </div>
+                            <div class="flex w-full flex-col">
+                              <label for="q_oa" class="mb-1 block text-sm font-bold tracking-wide text-gray-700">Option A</label>
+                              <input type="text" name="opa" id="q_oa" placeholder="Enter here option A" class="mb-1 block w-full appearance-none rounded border border-gray-300 bg-gray-50 px-2 py-2 leading-tight text-gray-600 focus:border-gray-200 focus:bg-white focus:outline-none">
+                            </div>
+                            <div class="flex w-full flex-col">
+                              <label for="q_ob" class="mb-1 block text-sm font-bold tracking-wide text-gray-700">Option B</label>
+                              <input type="text" name="opb" id="q_ob" placeholder="Enter here option B" class="mb-1 block w-full appearance-none rounded border border-gray-300 bg-gray-50 px-2 py-2 leading-tight text-gray-600 focus:border-gray-200 focus:bg-white focus:outline-none">
+                            </div>
+                            <div class="flex w-full flex-col">
+                              <label for="q_oc" class="mb-1 block text-sm font-bold tracking-wide text-gray-700">Option C</label>
+                              <input type="text" name="opc" id="q_oc" placeholder="Enter here option C" class="mb-1 block w-full appearance-none rounded border border-gray-300 bg-gray-50 px-2 py-2 leading-tight text-gray-600 focus:border-gray-200 focus:bg-white focus:outline-none">
+                            </div>
+                            <div class="flex w-full flex-col">
+                              <label for="q_od" class="mb-1 block text-sm font-bold tracking-wide text-gray-700">Option D</label>
+                              <input type="text" name="opd" id="q_od" placeholder="Enter here option D" class="mb-1 block w-full appearance-none rounded border border-gray-300 bg-gray-50 px-2 py-2 leading-tight text-gray-600 focus:border-gray-200 focus:bg-white focus:outline-none">
+                            </div>
+                          </div>
+                          <!-- Right Col -->
+                          <div class="divide-y divide-gray-300/50 md:w-1/2">
+                            <div class="space-y-2 pb-3">
+                              <div class="flex w-full flex-col gap-1">
+                                <h1 class="block text-sm font-bold tracking-wide text-gray-700">Select Correct Option</h1>
+                                <div class="flex w-full flex-row flex-wrap justify-between gap-3">
+                                  <div class="relative">
+                                    <input type="radio" name="co" id="co1" value="A" class="peer hidden" />
+                                    <label for="co1" class="after:top[calc(50% - 12px)] brfore:top-[calc(50% - 5px)] text-gray-500 relative flex cursor-pointer items-center rounded-[0.25rem] border-[1px] border-gray-300 bg-white py-[0.375rem] pl-[2rem] pr-[2.5rem] transition-all delay-100 before:absolute before:left-[11px] before:h-[10px] before:w-[10px] before:scale-[2] before:rounded-lg before:bg-green-500 before:opacity-0 before:transition before:delay-100 before:content-[''] after:absolute after:left-[7px] after:h-[18px] after:w-[18px] after:rounded-[50%] after:border-[2px] after:border-gray-300 after:transition after:delay-100 after:content-[''] peer-checked:border-green-500 peer-checked:bg-green-50 peer-checked:bg-opacity-[0.7] peer-checked:text-black peer-checked:before:visible peer-checked:before:scale-100 peer-checked:before:opacity-100 peer-checked:after:border-green-500"> A </label>
+                                    <div class="absolute bottom-1 right-2 top-0 my-auto flex scale-0 items-center justify-center text-[1.25rem] text-green-500 transition delay-100 peer-checked:scale-100">&#10003;</div>
+                                  </div>
+                                  <div class="relative">
+                                    <input type="radio" name="co" id="co2" value="B" class="peer hidden" />
+                                    <label for="co2" class="after:top[calc(50% - 12px)] brfore:top-[calc(50% - 5px)] text-gray-500 relative flex cursor-pointer items-center rounded-[0.25rem] border-[1px] border-gray-300 bg-white py-[0.375rem] pl-[2rem] pr-[2.5rem] transition-all delay-100 before:absolute before:left-[11px] before:h-[10px] before:w-[10px] before:scale-[2] before:rounded-lg before:bg-green-500 before:opacity-0 before:transition before:delay-100 before:content-[''] after:absolute after:left-[7px] after:h-[18px] after:w-[18px] after:rounded-[50%] after:border-[2px] after:border-gray-300 after:transition after:delay-100 after:content-[''] peer-checked:border-green-500 peer-checked:bg-green-50 peer-checked:bg-opacity-[0.7] peer-checked:text-black peer-checked:before:visible peer-checked:before:scale-100 peer-checked:before:opacity-100 peer-checked:after:border-green-500"> B </label>
+                                    <div class="absolute bottom-1 right-2 top-0 my-auto flex scale-0 items-center justify-center text-[1.25rem] text-green-500 transition delay-100 peer-checked:scale-100">&#10003;</div>
+                                  </div>
+                                  <div class="relative">
+                                    <input type="radio" name="co" id="co3" value="C" class="peer hidden" />
+                                    <label for="co3" class="after:top[calc(50% - 12px)] brfore:top-[calc(50% - 5px)] text-gray-500 relative flex cursor-pointer items-center rounded-[0.25rem] border-[1px] border-gray-300 bg-white py-[0.375rem] pl-[2rem] pr-[2.5rem] transition-all delay-100 before:absolute before:left-[11px] before:h-[10px] before:w-[10px] before:scale-[2] before:rounded-lg before:bg-green-500 before:opacity-0 before:transition before:delay-100 before:content-[''] after:absolute after:left-[7px] after:h-[18px] after:w-[18px] after:rounded-[50%] after:border-[2px] after:border-gray-300 after:transition after:delay-100 after:content-[''] peer-checked:border-green-500 peer-checked:bg-green-50 peer-checked:bg-opacity-[0.7] peer-checked:text-black peer-checked:before:visible peer-checked:before:scale-100 peer-checked:before:opacity-100 peer-checked:after:border-green-500"> C </label>
+                                    <div class="absolute bottom-1 right-2 top-0 my-auto flex scale-0 items-center justify-center text-[1.25rem] text-green-500 transition delay-100 peer-checked:scale-100">&#10003;</div>
+                                  </div>
+                                  <div class="relative">
+                                    <input type="radio" name="co" id="co4" value="D" class="peer hidden" />
+                                    <label for="co4" class="after:top[calc(50% - 12px)] brfore:top-[calc(50% - 5px)] text-gray-500 relative flex cursor-pointer items-center rounded-[0.25rem] border-[1px] border-gray-300 bg-white py-[0.375rem] pl-[2rem] pr-[2.5rem] transition-all delay-100 before:absolute before:left-[11px] before:h-[10px] before:w-[10px] before:scale-[2] before:rounded-lg before:bg-green-500 before:opacity-0 before:transition before:delay-100 before:content-[''] after:absolute after:left-[7px] after:h-[18px] after:w-[18px] after:rounded-[50%] after:border-[2px] after:border-gray-300 after:transition after:delay-100 after:content-[''] peer-checked:border-green-500 peer-checked:bg-green-50 peer-checked:bg-opacity-[0.7] peer-checked:text-black peer-checked:before:visible peer-checked:before:scale-100 peer-checked:before:opacity-100 peer-checked:after:border-green-500"> D </label>
+                                    <div class="absolute bottom-1 right-2 top-0 my-auto flex scale-0 items-center justify-center text-[1.25rem] text-green-500 transition delay-100 peer-checked:scale-100">&#10003;</div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="flex w-full flex-col gap-1">
+                                <h1 class="block text-sm font-bold tracking-wide text-gray-700">Select question for</h1>
+                                <div class="flex w-full flex-row justify-between gap-3">
+                                  <div class="relative w-full">
+                                    <input type="radio" name="que_typ" id="que_for_1" value="EXAM" class="peer hidden" />
+                                    <label for="que_for_1" class="after:top[calc(50% - 12px)] brfore:top-[calc(50% - 5px)] text-gray-500 relative flex cursor-pointer items-center rounded-[0.25rem] border-[1px] border-gray-300 bg-white px-[2.45rem] py-[0.375rem] transition-all delay-100 before:absolute before:left-[11px] before:h-[12px] before:w-[12px] before:scale-[2] before:rounded-lg before:bg-green-500 before:opacity-0 before:transition before:delay-100 before:content-[''] after:absolute after:left-[7px] after:h-[20px] after:w-[20px] after:rounded-[50%] after:border-[2px] after:border-gray-300 after:transition after:delay-100 after:content-[''] peer-checked:border-green-500 peer-checked:bg-green-50 peer-checked:bg-opacity-[0.7] peer-checked:text-black peer-checked:before:visible peer-checked:before:scale-100 peer-checked:before:opacity-100 peer-checked:after:border-green-500"> Exam </label>
+                                    <div class="absolute bottom-1 right-2 top-0 my-auto flex scale-0 items-center justify-center text-[1.5rem] text-green-500 transition delay-100 peer-checked:scale-100">&#10003;</div>
+                                  </div>
+                                  <div class="relative w-full">
+                                    <input type="radio" name="que_typ" id="que_for_2" value="QUIZ" class="peer hidden" />
+                                    <label for="que_for_2" class="after:top[calc(50% - 12px)] brfore:top-[calc(50% - 5px)] text-gray-500 relative flex cursor-pointer items-center rounded-[0.25rem] border-[1px] border-gray-300 bg-white px-[2.45rem] py-[0.375rem] transition-all delay-100 before:absolute before:left-[11px] before:h-[12px] before:w-[12px] before:scale-[2] before:rounded-lg before:bg-green-500 before:opacity-0 before:transition before:delay-100 before:content-[''] after:absolute after:left-[7px] after:h-[20px] after:w-[20px] after:rounded-[50%] after:border-[2px] after:border-gray-300 after:transition after:delay-100 after:content-[''] peer-checked:border-green-500 peer-checked:bg-green-50 peer-checked:bg-opacity-[0.7] peer-checked:text-black peer-checked:before:visible peer-checked:before:scale-100 peer-checked:before:opacity-100 peer-checked:after:border-green-500"> Quiz </label>
+                                    <div class="absolute bottom-1 right-2 top-0 my-auto flex scale-0 items-center justify-center text-[1.5rem] text-green-500 transition delay-100 peer-checked:scale-100">&#10003;</div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="flex flex-col pt-3">
+                              <button type="submit" class="text-md flex h-10 min-h-10 cursor-pointer items-center justify-center gap-3 rounded border bg-gray-600 px-3 py-1 text-sm font-semibold text-emerald-50 transition-colors duration-200 hover:bg-gray-700"> Add Question </button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="rounded bg-[#FFFFFF]">
+          <div class="mx-auto px-4 py-2">
+            <hr class="mb-[0.05rem] md:my-1 border-gray-200">
+            <div class="flex flex-col-reverse items-center justify-between md:gap-1 text-[0.75rem] md:text-sm md:flex-row">
+              <p class="lg:justify-strat lg:flex md:w-[30%] lg:w-[30%] lg:items-center"> Design &amp; Developed By &nbsp; <a href="#" class="delay-400 font-semibold no-underline transition-all hover:text-[#3399ff]">
+                  <strong> Md. Rabiul Islam</strong>
+                </a>
+              </p>
+              <p class="text-gray-500 sm:mt-0 lg:flex md:w-[60%] lg:items-center lg:justify-center">© Copyright 2023 - 2024. All Rights Reserved.</p>
+              <p class="lg:flex md:w-[30%] lg:w-[30%]  lg:items-center lg:justify-end"> Powered By &nbsp; <a href="#" class="delay-400 font-semibold no-underline transition-all hover:text-[#3399ff]">
+                  <strong> ADTLBD</strong>
+                </a>
+              </p>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var mriLwa = mriApp();
+        document.getElementById('ddlf').addEventListener('click', function(e) {
+          e.preventDefault();
+          mriLwa.toggleDropdown();
+        });
+        document.getElementById('cddlf').addEventListener('click', function(e) {
+          e.preventDefault();
+          mriLwa.closeDropdown();
+        });
+        // Additional functions usage:
+        var calloutBoxes = document.querySelectorAll('.callout-msg-box');
+        var notificationBoxes = document.querySelectorAll('.notification-box');
+        mriLwa.hideBoxes(calloutBoxes);
+        mriLwa.hideBoxes(notificationBoxes);
+        setInterval(function() {
+          mriLwa.updateClock();
+        }, 1000);
+        // mriLwa.closeDropdown(,);
+      });
+    </script>
+  </body>
+</html>
